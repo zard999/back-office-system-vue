@@ -52,8 +52,9 @@ const routes = [
       import(
         /* webpackChunkName: "layout" */ "../components/layouts/BasicLayout"
       ),
+
+    // dashboard (仪表盘)页面
     children: [
-      // dashboard (仪表盘)页面
       {
         path: "/",
         redirect: "/dashboard/analysis",
@@ -145,7 +146,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  // console.log(to.path, from.path);
+  // 当路由路径改变时，才使用进度条
+  if (to.path !== from.path) {
+    NProgress.start();
+  }
   next();
 });
 
